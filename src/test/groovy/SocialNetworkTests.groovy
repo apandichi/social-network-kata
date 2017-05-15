@@ -19,7 +19,11 @@ class SocialNetworkTests extends Specification {
 		def alice
 
 		expect:
-		timelineOf(alice) == true
+		timelineOf(alice) == timelineContainingAlicesMessage()
+	}
+
+	def timelineContainingAlicesMessage() {
+		
 	}
 
 	def timelineOf(user) {
