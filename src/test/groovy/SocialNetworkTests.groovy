@@ -20,13 +20,13 @@ class SocialNetworkTests extends Specification {
 		def alicesMessage
 
 		when: "Alice publishes her message to her timeline"
-		alicePublishesMessageToHerTimeline(alice, alicesMessage)
+		userPublishesMessageToTheirTimeline(alice, alicesMessage)
 
 		then: "Alices's timeline contains her message"
 		timelineOf(alice) == timelineContaining(alicesMessage)
 	}
 
-	def alicePublishesMessageToHerTimeline(alice, alicesMessage) {
+	def userPublishesMessageToTheirTimeline(alice, alicesMessage) {
 	}
 
 	def timelineContaining(message) {
