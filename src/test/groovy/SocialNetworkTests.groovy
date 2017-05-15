@@ -14,6 +14,11 @@ class SocialNetworkTests extends Specification {
 		alicesTimeline == emptyTimeline()
 	}
 
+	def "Alice can publish a message to her timeline"() {
+		expect:
+		true == true
+	}
+
 	def timelineOf(user) {
 		true
 	}
