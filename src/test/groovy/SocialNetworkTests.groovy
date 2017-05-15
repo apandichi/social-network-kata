@@ -7,9 +7,10 @@ class SocialNetworkTests extends Specification {
 		given: "A user named Alice"
 
 		when: "Alice inspects her personal timeline"
+		def alicesPersonalTimeline = alicesPersonalTimeline()
 
 		then: "Alice sees an empty personal timeline"
-		alicesPersonalTimeline() == emptyPersonalTimeline()
+		alicesPersonalTimeline == emptyPersonalTimeline()
 	}
 
 	def alicesPersonalTimeline() {
