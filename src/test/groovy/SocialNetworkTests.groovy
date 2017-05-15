@@ -19,7 +19,7 @@ class SocialNetworkTests extends Specification {
 		def alice
 		def alicesMessage
 
-		expect:
+		expect: "Alices's timeline contains her message"
 		timelineOf(alice) == timelineContaining(alicesMessage)
 	}
 
