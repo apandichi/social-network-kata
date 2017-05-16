@@ -26,6 +26,15 @@ class SocialNetworkTests extends Specification {
 		timelineOf(alice) == timelineContaining(alicesMessage)
 	}
 
+	def "Alice can publish multiple messages to her timeline"() {
+		given: "A user named Alice and her messages"
+		def alice
+		def alicesMessages
+
+		expect: "Alices's timeline contains all her messages"
+		timelineOf(alice) == timelineContaining(alicesMessages)
+	}
+
 	def userPublishesMessageToTheirTimeline(alice, alicesMessage) {
 	}
 
