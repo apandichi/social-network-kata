@@ -18,11 +18,8 @@ class SocialNetworkTests extends Specification {
 	}
 
 	def "Alice has an empty timeline"() {
-		when: "Alice inspects her timeline"
-		def alicesTimeline = timelineOf(alice)
-
-		then: "Alice sees an empty timeline"
-		alicesTimeline.isEmpty()
+		expect:
+		timelineOf(alice).isEmpty()
 	}
 
 	def "Alice can publish a message to her timeline"() {
