@@ -17,7 +17,7 @@ class SocialNetworkTests extends Specification {
 	def "Alice can publish a message to her timeline"() {
 		given: "A user named Alice and her message"
 		def alice
-		def alicesMessage
+		def alicesMessage = "Hello, this is my first message"
 
 		when: "Alice publishes her message to her timeline"
 		userPublishesMessageToTheirTimeline(alice, alicesMessage)
