@@ -3,10 +3,9 @@ import spock.lang.Specification
 
 class SocialNetworkTests extends Specification {
 
-	def "Alice has an empty timeline"() {
-		given: "A user named Alice"
-		def alice
+	def alice
 
+	def "Alice has an empty timeline"() {
 		when: "Alice inspects her timeline"
 		def alicesTimeline = timelineOf(alice)
 
@@ -16,7 +15,6 @@ class SocialNetworkTests extends Specification {
 
 	def "Alice can publish a message to her timeline"() {
 		given: "A user named Alice and her message"
-		def alice
 		def alicesMessage = "Hello, this is my first message"
 
 		when: "Alice publishes her message to her timeline"
@@ -28,7 +26,6 @@ class SocialNetworkTests extends Specification {
 
 	def "Alice can publish multiple messages to her timeline"() {
 		given: "A user named Alice and her messages"
-		def alice
 		def alicesMessages
 
 		expect: "Alices's timeline contains all her messages"
