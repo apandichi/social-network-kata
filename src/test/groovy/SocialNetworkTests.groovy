@@ -19,7 +19,7 @@ class SocialNetworkTests extends Specification {
 
 	def "Alice has an empty timeline"() {
 		expect:
-		timelineOf(alice).isEmpty()
+		alice.timeline().isEmpty()
 	}
 
 	def "Alice can publish a message to her timeline"() {
@@ -30,7 +30,7 @@ class SocialNetworkTests extends Specification {
 		userPublishesMessageToTheirTimeline(alice, alicesMessage)
 
 		then: "Alices's timeline contains her message"
-		timelineOf(alice).contains(alicesMessage)
+		alice.timeline().contains(alicesMessage)
 	}
 
 	def "Alice can publish multiple messages to her timeline"() {
@@ -43,15 +43,10 @@ class SocialNetworkTests extends Specification {
 		}
 
 		then: "Alices's timeline contains all her messages"
-		timelineOf(alice).containsAll(alicesMessages)
+		alice.timeline().containsAll(alicesMessages)
 	}
 
 	def userPublishesMessageToTheirTimeline(alice, alicesMessage) {
 		alice.publishToTimeline(alicesMessage)
 	}
-
-	def timelineOf(user) {
-		user.timeline()
-	}
-
 }
