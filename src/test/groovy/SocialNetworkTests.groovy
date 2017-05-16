@@ -3,7 +3,19 @@ import spock.lang.Specification
 
 class SocialNetworkTests extends Specification {
 
-	def alice
+	def alice = new SocialNetworkUser()
+
+	class SocialNetworkUser {
+		def timeline = []
+
+		def timeline() {
+			timeline
+		}
+
+		def publishToTimeline(message) {
+			timeline.add(message)
+		}
+	}
 
 	def "Alice has an empty timeline"() {
 		when: "Alice inspects her timeline"
@@ -21,29 +33,30 @@ class SocialNetworkTests extends Specification {
 		userPublishesMessageToTheirTimeline(alice, alicesMessage)
 
 		then: "Alices's timeline contains her message"
-		timelineOf(alice) == timelineContaining(alicesMessage)
+		timelineOf(alice).contains(alicesMessage)
 	}
 
 	def "Alice can publish multiple messages to her timeline"() {
 		given: "A user named Alice and her messages"
-		def alicesMessages
+		def alicesMessages = ["Hello, this is my first message", "Is this thing on?"]
 
-		expect: "Alices's timeline contains all her messages"
-		timelineOf(alice) == timelineContaining(alicesMessages)
+		when: "Alice publishes her messages to her timeline"
+		userPublishesMessageToTheirTimeline(alice, alicesMessages[0])
+		userPublishesMessageToTheirTimeline(alice, alicesMessages[1])
+
+		then: "Alices's timeline contains all her messages"
+		timelineOf(alice).containsAll(alicesMessages)
 	}
 
 	def userPublishesMessageToTheirTimeline(alice, alicesMessage) {
-	}
-
-	def timelineContaining(message) {
-		true
+		alice.publishToTimeline(alicesMessage)
 	}
 
 	def timelineOf(user) {
-		true
+		user.timeline()
 	}
 
 	def emptyTimeline() {
-		true
+		[]
 	}
 }
