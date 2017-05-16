@@ -22,7 +22,7 @@ class SocialNetworkTests extends Specification {
 		def alicesTimeline = timelineOf(alice)
 
 		then: "Alice sees an empty timeline"
-		alicesTimeline == emptyTimeline()
+		alicesTimeline.isEmpty()
 	}
 
 	def "Alice can publish a message to her timeline"() {
@@ -56,7 +56,4 @@ class SocialNetworkTests extends Specification {
 		user.timeline()
 	}
 
-	def emptyTimeline() {
-		[]
-	}
 }
