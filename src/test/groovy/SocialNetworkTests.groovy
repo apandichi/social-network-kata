@@ -38,8 +38,9 @@ class SocialNetworkTests extends Specification {
 		def alicesMessages = ["Hello, this is my first message", "Is this thing on?"]
 
 		when: "Alice publishes her messages to her timeline"
-		userPublishesMessageToTheirTimeline(alice, alicesMessages[0])
-		userPublishesMessageToTheirTimeline(alice, alicesMessages[1])
+		alicesMessages.each {
+			userPublishesMessageToTheirTimeline(alice, it)
+		}
 
 		then: "Alices's timeline contains all her messages"
 		timelineOf(alice).containsAll(alicesMessages)
