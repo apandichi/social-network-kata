@@ -4,9 +4,12 @@ import spock.lang.Specification
 class SocialNetworkTests extends Specification {
 
 	def alice = new SocialNetworkUser()
+	def bob = new SocialNetworkUser()
+	def charlie = new SocialNetworkUser()
 
 	class SocialNetworkUser {
 		def timeline = []
+		def following = []
 
 		def timeline() {
 			timeline
@@ -14,6 +17,14 @@ class SocialNetworkTests extends Specification {
 
 		def publishToTimeline(message) {
 			timeline.add(message)
+		}
+
+		def following() {
+			following
+		}
+
+		def follow(def user) {
+			following.push(user)
 		}
 	}
 
@@ -44,6 +55,16 @@ class SocialNetworkTests extends Specification {
 
 		then: "Alices's timeline contains all her messages"
 		alice.timeline().containsAll(alicesMessages)
+	}
+
+	def "Charile can subscribe to Alice's and Bob's timelines"() {
+		when: "Charlie follows Alice and Bob"
+		charlie.follow(alice)
+		charlie.follow(bob)
+
+		then: "Alice and Bob are in Charlie's list of people subscribed to"
+		charlie.following().contains(alice)
+		charlie.following().contains(bob)
 	}
 
 	def userPublishesMessageToTheirTimeline(alice, alicesMessage) {
