@@ -19,12 +19,19 @@ class SocialNetworkTests extends Specification {
 			timeline.add(message)
 		}
 
-		def following() {
+		def followings() {
 			following
 		}
 
 		def follow(def user) {
-			following.push(user)
+			following.add(user)
+		}
+
+		def newsfeed() {
+			followings().inject([], {newsfeed, user ->
+				newsfeed.addAll(user.timeline())
+				return newsfeed
+			})
 		}
 	}
 
@@ -63,8 +70,32 @@ class SocialNetworkTests extends Specification {
 		charlie.follow(bob)
 
 		then: "Alice and Bob are in Charlie's list of people subscribed to"
-		charlie.following().contains(alice)
-		charlie.following().contains(bob)
+		charlie.followings().contains(alice)
+		charlie.followings().contains(bob)
+	}
+
+	def "Charlie can view an aggregated list of Alice's and Bob's timelines"() {
+		given:
+		charlieFollowsAliceAndBob()
+		def alicesMessages = userPublishesMessages(alice, ["message 1", "message 2"])
+		def bobsMessages = userPublishesMessages(bob, ["message 3"])
+
+		when:
+		def newsfeed = charlie.newsfeed()
+
+		then:
+		newsfeed.containsAll(alicesMessages + bobsMessages)
+	}
+
+	def userPublishesMessages(def user, def messages) {
+		messages.each {
+			userPublishesMessageToTheirTimeline(user, it)
+		}
+	}
+
+	def charlieFollowsAliceAndBob() {
+		charlie.follow(alice)
+		charlie.follow(bob)
 	}
 
 	def userPublishesMessageToTheirTimeline(alice, alicesMessage) {
