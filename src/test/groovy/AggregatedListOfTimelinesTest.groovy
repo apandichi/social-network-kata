@@ -1,7 +1,7 @@
 import spock.lang.Specification
 
 
-class AggregatedListOfTimelinesTest extends Specification {
+class AggregatedListOfTimelinesTest extends Specification implements MessageBuilderTrait {
 
 	// social network users
 	def alice = new SocialNetworkUser()
@@ -16,10 +16,6 @@ class AggregatedListOfTimelinesTest extends Specification {
 	// Bob's messages
 	def messageThree = message("message 3")
 	def bobsMessages = [messageThree]
-
-	def message(text) {
-		return new Message(text: text)
-	}
 
 	def "Charlie can view an aggregated list of Alice's and Bob's timelines"() {
 		given: "Charlie follows Alice and Bob"

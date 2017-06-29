@@ -1,7 +1,7 @@
 import spock.lang.Specification
 
 
-class SocialNetworkTests extends Specification {
+class SocialNetworkTests extends Specification implements MessageBuilderTrait {
 
 	def alice = new SocialNetworkUser()
 	def bob = new SocialNetworkUser()
@@ -10,10 +10,6 @@ class SocialNetworkTests extends Specification {
 	def "Alice has an empty timeline"() {
 		expect:
 		alice.timeline().isEmpty()
-	}
-
-	def message(text) {
-		return new Message(text: text)
 	}
 
 	def "Alice can publish a message to her timeline"() {
