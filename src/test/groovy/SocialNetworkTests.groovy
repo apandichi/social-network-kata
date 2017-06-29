@@ -15,7 +15,7 @@ class SocialNetworkTests extends Specification {
 			timeline
 		}
 
-		def publishToTimeline(message) {
+		def publish(message) {
 			timeline.add(message)
 		}
 
@@ -108,6 +108,6 @@ class SocialNetworkTests extends Specification {
 	}
 
 	def userPublishesMessageToTheirTimeline(alice, alicesMessage) {
-		alice.publishToTimeline(alicesMessage)
+		alice.publish(alicesMessage)
 	}
 }
