@@ -51,12 +51,6 @@ class SocialNetworkTests extends Specification {
 		charlie.followings().contains(bob)
 	}
 
-	def userPublishesMessages(def user, def messages) {
-		messages.each {
-			userPublishesMessageToTheirTimeline(user, it)
-		}
-	}
-
 	def userPublishesMessageToTheirTimeline(alice, alicesMessage) {
 		alice.publish(alicesMessage)
 	}
