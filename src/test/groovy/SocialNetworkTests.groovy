@@ -84,22 +84,28 @@ class SocialNetworkTests extends Specification {
 	}
 
 	def "Charlie can view an aggregated list of Alice's and Bob's timelines"() {
-		given: "A bunch of messages"
+		given: "Alice's messages"
 		def messageOne = message("message 1")
 		def messageTwo = message("message 2")
+		def alicesMessages = [messageOne, messageTwo]
+
+		and: "Bob's messages"
 		def messageThree = message("message 3")
+		def bobsMessages = [messageThree]
 
 		and: "Charlie follows Alice and Bob"
 		charlie.follow(alice)
 		charlie.follow(bob)
 
-		when: "Alice publishes two messages and Bob publishes one message"
+		when: "Alice publishes two messages"
 		alice.publish(messageOne)
 		alice.publish(messageTwo)
+
+		and: "Bob publishes one message"
 		bob.publish(messageThree)
 
 		then: "Charlie's newsfeed contains all messages"
-		charlie.newsfeed().containsAll([messageOne, messageTwo, messageThree])
+		charlie.newsfeed().containsAll(alicesMessages + bobsMessages)
 	}
 
 	def userPublishesMessages(def user, def messages) {
