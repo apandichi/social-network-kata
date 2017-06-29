@@ -60,14 +60,14 @@ class SocialNetworkTests extends Specification {
 	}
 
 	def "Alice can publish multiple messages to her timeline"() {
-		given: "A user named Alice and her messages"
-		def alicesMessages = [
-				message("Hello, this is my first message"), message("Is this thing on?")]
+		given: "Alice's messages"
+		def messageOne = message("Hello, this is my first message")
+		def messageTwo = message("Is this thing on?")
+		def alicesMessages = [messageOne, messageTwo]
 
 		when: "Alice publishes her messages to her timeline"
-		alicesMessages.each {
-			userPublishesMessageToTheirTimeline(alice, it)
-		}
+		alice.publish(messageOne)
+		alice.publish(messageTwo)
 
 		then: "Alices's timeline contains all her messages"
 		alice.timeline().containsAll(alicesMessages)
