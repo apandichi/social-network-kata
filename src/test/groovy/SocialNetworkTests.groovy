@@ -35,13 +35,17 @@ class SocialNetworkTests extends Specification {
 		}
 	}
 
+	class Message {
+		def text
+	}
+
 	def "Alice has an empty timeline"() {
 		expect:
 		alice.timeline().isEmpty()
 	}
 
 	def buildMessage(text) {
-		return [text: text]
+		return new Message(text: text)
 	}
 
 	def "Alice can publish a message to her timeline"() {
