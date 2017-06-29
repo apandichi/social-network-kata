@@ -7,38 +7,6 @@ class SocialNetworkTests extends Specification {
 	def bob = new SocialNetworkUser()
 	def charlie = new SocialNetworkUser()
 
-	class SocialNetworkUser {
-		def timeline = []
-		def following = []
-
-		def timeline() {
-			timeline
-		}
-
-		def publish(message) {
-			timeline.add(message)
-		}
-
-		def followings() {
-			following
-		}
-
-		def follow(def user) {
-			following.add(user)
-		}
-
-		def newsfeed() {
-			followings().inject([], {newsfeed, user ->
-				newsfeed.addAll(user.timeline())
-				return newsfeed
-			})
-		}
-	}
-
-	class Message {
-		def text
-	}
-
 	def "Alice has an empty timeline"() {
 		expect:
 		alice.timeline().isEmpty()
