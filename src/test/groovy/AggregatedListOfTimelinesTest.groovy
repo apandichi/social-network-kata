@@ -3,25 +3,26 @@ import spock.lang.Specification
 
 class AggregatedListOfTimelinesTest extends Specification {
 
+	// social network users
 	def alice = new SocialNetworkUser()
 	def bob = new SocialNetworkUser()
 	def charlie = new SocialNetworkUser()
+
+	// Alice's messages
+	def messageOne = message("message 1")
+	def messageTwo = message("message 2")
+	def alicesMessages = [messageOne, messageTwo]
+
+	// Bob's messages
+	def messageThree = message("message 3")
+	def bobsMessages = [messageThree]
 
 	def message(text) {
 		return new Message(text: text)
 	}
 
 	def "Charlie can view an aggregated list of Alice's and Bob's timelines"() {
-		given: "Alice's messages"
-		def messageOne = message("message 1")
-		def messageTwo = message("message 2")
-		def alicesMessages = [messageOne, messageTwo]
-
-		and: "Bob's messages"
-		def messageThree = message("message 3")
-		def bobsMessages = [messageThree]
-
-		and: "Charlie follows Alice and Bob"
+		given: "Charlie follows Alice and Bob"
 		charlie.follow(alice)
 		charlie.follow(bob)
 
