@@ -85,7 +85,8 @@ class SocialNetworkTests extends Specification {
 
 	def "Charlie can view an aggregated list of Alice's and Bob's timelines"() {
 		given:
-		charlieFollowsAliceAndBob()
+		charlie.follow(alice)
+		charlie.follow(bob)
 		def alicesMessages = userPublishesMessages(alice, [message("message 1"), message("message 2")])
 		def bobsMessages = userPublishesMessages(bob, [message("message 3")])
 
@@ -101,12 +102,7 @@ class SocialNetworkTests extends Specification {
 			userPublishesMessageToTheirTimeline(user, it)
 		}
 	}
-
-	def charlieFollowsAliceAndBob() {
-		charlie.follow(alice)
-		charlie.follow(bob)
-	}
-
+	
 	def userPublishesMessageToTheirTimeline(alice, alicesMessage) {
 		alice.publish(alicesMessage)
 	}
