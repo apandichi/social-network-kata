@@ -21,7 +21,7 @@ class SocialNetworkTests extends Specification {
 		def alicesMessage = message("Hello, this is my first message")
 
 		when: "Alice publishes her message to her timeline"
-		userPublishesMessageToTheirTimeline(alice, alicesMessage)
+		alice.publish(alicesMessage)
 
 		then: "Alices's timeline contains her message"
 		alice.timeline().contains(alicesMessage)
@@ -49,9 +49,5 @@ class SocialNetworkTests extends Specification {
 		then: "Alice and Bob are in Charlie's list of people subscribed to"
 		charlie.followings().contains(alice)
 		charlie.followings().contains(bob)
-	}
-
-	def userPublishesMessageToTheirTimeline(alice, alicesMessage) {
-		alice.publish(alicesMessage)
 	}
 }
