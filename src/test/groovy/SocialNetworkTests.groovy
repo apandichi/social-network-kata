@@ -57,7 +57,8 @@ class SocialNetworkTests extends Specification {
 
 	def "Alice can publish multiple messages to her timeline"() {
 		given: "A user named Alice and her messages"
-		def alicesMessages = ["Hello, this is my first message", "Is this thing on?"]
+		def alicesMessages = [
+				buildMessage("Hello, this is my first message"), buildMessage("Is this thing on?")]
 
 		when: "Alice publishes her messages to her timeline"
 		alicesMessages.each {
@@ -81,8 +82,8 @@ class SocialNetworkTests extends Specification {
 	def "Charlie can view an aggregated list of Alice's and Bob's timelines"() {
 		given:
 		charlieFollowsAliceAndBob()
-		def alicesMessages = userPublishesMessages(alice, ["message 1", "message 2"])
-		def bobsMessages = userPublishesMessages(bob, ["message 3"])
+		def alicesMessages = userPublishesMessages(alice, [buildMessage("message 1"), buildMessage("message 2")])
+		def bobsMessages = userPublishesMessages(bob, [buildMessage("message 3")])
 
 		when:
 		def newsfeed = charlie.newsfeed()
